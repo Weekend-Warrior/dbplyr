@@ -36,11 +36,7 @@ sql_select.DBIConnection <- function(con, select, from, where = NULL,
 
 #' @export
 sql_subquery.DBIConnection <- function(con, from, name = unique_name(), ...) {
-  if (is.ident(from)) {
-    setNames(from, name)
-  } else {
-    build_sql("(", from, ") ", ident(name %||% random_table_name()), con = con)
-  }
+    build_sql(ident_q(from), " ", ident_q(name %||% random_table_name()), con = con)
 }
 
 #' @export
